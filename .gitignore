@@ -7,3 +7,6 @@ __pycache__/
 build/
 dist/
 outputs/
+node_modules/
+playwright-report/
+test-results/

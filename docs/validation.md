@@ -28,7 +28,9 @@ The heat exterior was checked against an independent adaptive integral at `Z = 0
 
 ## Application and packaging
 
-The standalone HTML app passed Chromium desktop (1280×960) and mobile (390×844) viewport checks, including slider changes, resolution changes, animation, no page errors, and no horizontal mobile overflow. Browser inspection covered the resulting layout. Other browsers, assistive technology, and exhaustive interaction testing are **Not Yet Tested**.
+The [automated Chromium checks](https://github.com/james-coder/navier-stokes-blowup/blob/main/tests/browser/observatory.spec.cjs) pass eight tests across the checked-in demo and a freshly generated app with a different `h`. They check time/resolution extremes against the actual dataset, both view modes, animation pause/end/restart, 390/768/1440-pixel layouts, canvas drawing, exact JSON downloads, and console errors. Screenshots are retained as CI artifacts; the mobile layout was also visually inspected. Other browsers and assistive technology are **Not Yet Tested**.
+
+Embedded numerical data now lives in a hidden text element with HTML escaping. This avoids the JSON execution error caused by [HTMLPreview's script reconstruction](https://github.com/htmlpreview/htmlpreview.github.com/blob/master/htmlpreview.js). A local compatibility test exercises reconstruction of every script as JavaScript without depending on that service's availability.
 
 The quickstart, forcing optimization, construction-scale export, figure reproduction, and 3D float64 CLI were executed. The forcing example reduced its objective from about 0.1005 to 5e-15 and recovered the target amplitude 1.5. This is one small inverse problem, not a general optimization guarantee.
 

@@ -1,5 +1,6 @@
 """Build the offline Singularity Observatory from computed construction components."""
 import argparse
+import html
 from importlib.resources import files
 import json
 from pathlib import Path
@@ -60,7 +61,7 @@ def build_observatory(output="outputs/observatory.html", *, h=.005):
     template=files('ns_blowup').joinpath('assets/observatory.html').read_text()
     output=Path(output)
     output.parent.mkdir(parents=True,exist_ok=True)
-    output.write_text(template.replace('__DATA__',encoded.replace('<','\\u003c')))
+    output.write_text(template.replace('__DATA__',html.escape(encoded, quote=False)))
     output.with_suffix('.json').write_text(json.dumps(payload,indent=2)+'\n')
     return output
 
