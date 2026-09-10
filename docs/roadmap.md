@@ -6,6 +6,8 @@ The completed application should let a researcher select a concrete realization 
 
 **Current status:** a working component observatory plus a general periodic numerical foundation. Complete construction reproduction and solver tracking remain **Not Implemented / Not Yet Tested**. The stages below are outstanding work, not installed features.
 
+The [issue backlog](backlog.md) breaks these stages, validation gaps, and optional application ideas into actionable GitHub issues with completion criteria and prerequisite links.
+
 ## 1. Make all construction choices computational
 
 Record each profile equation, parameter inequality, support cutoff, normalization, and matching condition against a pinned mathematical source. Implement actual coefficient-selection and profile-solving algorithms, not only dataclasses that accept unknown coefficients. Distinguish existence choices from formulas and provide a reproducible choice strategy.

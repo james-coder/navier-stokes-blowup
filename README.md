@@ -133,6 +133,8 @@ d_energy_d_amplitude = jax.jit(jax.grad(final_energy))(1.0)
 
 ## What works, and what does not
 
+Outstanding implementation, validation, and future ideas are tracked in the [GitHub backlog](https://github.com/james-coder/navier-stokes-blowup/issues/1), with an [area-by-area guide](https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/backlog.md).
+
 “Tested” means the listed checks passed in this checkout on the recorded environment, not that all physical regimes are validated.
 
 | Capability | Status | Evidence / limit |
