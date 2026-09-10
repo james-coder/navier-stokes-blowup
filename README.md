@@ -6,7 +6,7 @@ The aim is to make a new mathematical construction something people can inspect,
 
 **Version 0.1.0 is a research preview.** The library runs real 2D/3D periodic simulations and evaluates specific components of OpenAI’s published construction. **The complete smooth blowup solution is Not Implemented.** This release does not yet support the claim that it reproduces the theorem or enables previously impossible fluid simulation.
 
-[Open the observatory](https://htmlpreview.github.io/?https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/observatory.html) · [Getting started](https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/tutorial.md) · [API](https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/api.md) · [Research and implementation gaps](https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/research.md) · [Original conversation](https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/conversation.md)
+[Open the observatory](https://htmlpreview.github.io/?https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/observatory.html) · [Download offline app and docs](https://github.com/james-coder/navier-stokes-blowup/releases/latest/download/documentation.zip) · [Getting started](https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/tutorial.md) · [API](https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/api.md) · [Research and implementation gaps](https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/research.md) · [Original conversation](https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/conversation.md)
 
 ## The flagship application
 
@@ -20,17 +20,17 @@ The **working preview** lets you:
 - Compare normalized velocity and core-energy scaling.
 - Change a hypothetical grid resolution and see its spatial coverage.
 - Inspect an actual FP32/FP64 refinement experiment for the outer heat-flow component.
-- Download every numerical dataset behind the display.
+- [Download the app and its numerical datasets](https://github.com/james-coder/navier-stokes-blowup/releases/latest/download/documentation.zip) for offline use.
 
 The geometry sampling threshold is a heuristic. The scaling plots are not measured norms of a completed blowup solution. The heat exterior is valid away from the axis and is itself singular on the axis at all times; it must not be used as smooth initial data for a purported blowup reproduction. The implementation boundary follows equations (3.2), (4.1), and Lemma A.6 of the [paper](https://cdn.openai.com/pdf/32d9f210-8b73-45e0-91bc-82a30aef8a9a/navier-stokes.pdf).
 
-Use [the browser preview](https://htmlpreview.github.io/?https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/observatory.html) to run the checked-in app directly. For offline use, download `docs/observatory.html` and open it locally; the downloaded app is self-contained and needs no server, account, CDN, or Python installation. To regenerate it:
+Use [the browser preview](https://htmlpreview.github.io/?https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/observatory.html) to run the checked-in app directly. For offline use, [download the app and documentation ZIP](https://github.com/james-coder/navier-stokes-blowup/releases/latest/download/documentation.zip), extract it, and open `observatory.html` from that folder. The downloaded app is self-contained and needs no server, account, CDN, or Python installation. To regenerate it:
 
 ```bash
 python -m ns_blowup.observatory --output outputs/observatory.html
 ```
 
-Its data are also saved as `outputs/observatory.json`. The intended mature application and its acceptance criteria are described in [the roadmap](https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/roadmap.md).
+You can inspect the checked-in [numerical dataset](https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/observatory.json). Regenerating the app also writes `outputs/observatory.json`. The intended mature application and its acceptance criteria are described in [the roadmap](https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/roadmap.md).
 
 ## Install
 
@@ -51,7 +51,7 @@ export XLA_PYTHON_CLIENT_PREALLOCATE=false
 
 CUDA 12 was exercised on the local RTX 4090. A `cuda13` extra is provided but **Not Yet Tested**. Driver/platform requirements come from the [JAX installation guide](https://docs.jax.dev/en/latest/installation.html). Disabling preallocation helps when sharing a GPU; it does not make an oversized calculation fit in memory. See [JAX GPU memory allocation](https://docs.jax.dev/en/latest/gpu_memory_allocation.html).
 
-For development, clone this repository and run `python -m pip install -e '.[dev,plot]'` from its root.
+For development, clone [this repository](https://github.com/james-coder/navier-stokes-blowup) and run `python -m pip install -e '.[dev,plot]'` from its root. See the [contributor setup and checks](https://github.com/james-coder/navier-stokes-blowup/blob/main/CONTRIBUTING.md).
 
 ## Your first simulation
 
@@ -68,6 +68,10 @@ result.plot(quantity="vorticity", path="outputs/vorticity.png")
 result.save("outputs/flow.npz")
 print(result.diagnostics()["energy"])
 ```
+
+![Signed vorticity of the 32 by 32 Taylor–Green simulation at time 1.0, with viscosity 0.05](https://raw.githubusercontent.com/james-coder/navier-stokes-blowup/main/docs/images/vorticity.png)
+
+This is the actual vorticity plot from the example above: a 32×32 periodic Taylor–Green flow at `t=1.0`, with viscosity `nu=0.05`. [View the full-size PNG](https://raw.githubusercontent.com/james-coder/navier-stokes-blowup/main/docs/images/vorticity.png) or [reproduce it with the rendering example](https://github.com/james-coder/navier-stokes-blowup/blob/main/examples/render_vorticity.py).
 
 `Simulation` chooses a JAX device, projects the initial velocity, adapts the timestep, checks for nonfinite states, and returns uniformly timed snapshots. `result.final` is the last velocity field. No array-layout knowledge is needed for the built-in examples.
 
@@ -215,6 +219,6 @@ GitHub Actions tests Python 3.12/3.13, builds the documentation, builds and chec
 
 ## Sources and provenance
 
-The shared conversation was extracted with the existing `chatgpt-import-share` checkout. The [Markdown transcript](https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/conversation.md), [structured export](https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/conversation.json), and [source manifest](https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/source-manifest.json) preserve provenance and redacted/unavailable-message markers. The conversation is a design input, not independent evidence for its claims.
+The shared conversation was extracted with [chatgpt-import-share](https://github.com/james-coder/chatgpt-import-share). The [Markdown transcript](https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/conversation.md), [structured export](https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/conversation.json), and [source manifest](https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/source-manifest.json) preserve provenance and redacted/unavailable-message markers. The conversation is a design input, not independent evidence for its claims.
 
-The manifest pins the inspected Lean commit and records the paper hash. Read the [research note](https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/research.md) and [annotated sources](https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/sources.md) for the implementation decisions and unresolved questions. [Contributing](https://github.com/james-coder/navier-stokes-blowup/blob/main/CONTRIBUTING.md) describes the evidence required for new features. Code is MIT licensed; the imported conversation and referenced third-party works retain their respective rights.
+The manifest pins the inspected Lean commit and records the paper hash. Read the [research note](https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/research.md) and [annotated sources](https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/sources.md) for the implementation decisions and unresolved questions. [Contributing](https://github.com/james-coder/navier-stokes-blowup/blob/main/CONTRIBUTING.md) describes the evidence required for new features. Code uses the [MIT license](https://github.com/james-coder/navier-stokes-blowup/blob/main/LICENSE); the imported conversation and referenced third-party works retain their respective rights.

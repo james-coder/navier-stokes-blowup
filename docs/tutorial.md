@@ -2,13 +2,13 @@
 
 ## 1. Explore before installing
 
-Open [the Singularity Observatory in your browser](https://htmlpreview.github.io/?https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/observatory.html). Move the time slider, switch between fixed physical scale and following the core, and change the grid resolution. The labels distinguish coordinate geometry from measured numerical residuals. Download the JSON if you want to analyze the plotted data separately.
+Open [the Singularity Observatory in your browser](https://htmlpreview.github.io/?https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/observatory.html). Move the time slider, switch between fixed physical scale and following the core, and change the grid resolution. The labels distinguish coordinate geometry from measured numerical residuals. Inspect the [numerical dataset](observatory.json), or use the app's **Download numerical data (JSON)** button to save it for analysis.
 
-For offline use, download `docs/observatory.html` and open it locally. In a built or downloaded documentation site, you can also [open the bundled app](observatory.html) directly. The downloaded app needs no Python installation or network connection.
+For offline use, [download the app and documentation ZIP](https://github.com/james-coder/navier-stokes-blowup/releases/latest/download/documentation.zip), extract it, and open `observatory.html` from that folder. In a built or downloaded documentation site, you can also [open the bundled app](observatory.html) directly. The downloaded app needs no Python installation or network connection.
 
 ## 2. Run a simple flow
 
-Install from the repository using the README instructions. Then:
+Follow the [installation instructions](https://github.com/james-coder/navier-stokes-blowup#install). Then:
 
 ```python
 from ns_blowup import Simulation
@@ -21,6 +21,12 @@ result.plot(path="outputs/first-flow.png")
 ```
 
 The default box is `[0,2π)` in each direction, with periodic boundaries. The initial velocity is a built-in decaying vortex. The viscosity controls diffusion. Frame count controls saved output, not the internal timestep. A saved image shows the final speed by default.
+
+For a vorticity plot, use `result.plot(quantity="vorticity", path="outputs/vorticity.png")`. Here is a checked-in example at `t=1.0`, with a 32×32 grid and `nu=0.05`:
+
+![Signed vorticity of a Taylor–Green flow at time 1.0](images/vorticity.png)
+
+[Full-size PNG](images/vorticity.png) · [Script that generated it](https://github.com/james-coder/navier-stokes-blowup/blob/main/examples/render_vorticity.py).
 
 Change the shape to `(24,24,24)` and the initial condition to `"abc"` for a three-dimensional exact flow. Use small shapes while learning; storage and intermediate arrays grow with the product of all grid dimensions.
 
@@ -73,7 +79,7 @@ NPZ carries grid lengths, time samples, viscosity, velocity, schema version, and
 
 ## 6. Choose numerical precision
 
-Start a fresh shell command with x64 enabled:
+Run the [quickstart example](https://github.com/james-coder/navier-stokes-blowup/blob/main/examples/quickstart.py) from a checkout with x64 enabled:
 
 ```bash
 JAX_ENABLE_X64=1 python examples/quickstart.py

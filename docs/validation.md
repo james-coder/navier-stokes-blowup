@@ -38,4 +38,4 @@ For hosted GitHub Actions and Python 3.13 results, consult the [CI run history](
 
 ## Reproduction
 
-Use the README commands and compare results with tolerances appropriate to the dtype. Floating-point results and timings can vary with hardware, JAX/compiler versions, and device load. The checked-in reports capture a tested environment; they are not promises of bitwise reproducibility or performance.
+Use the [README validation commands](https://github.com/james-coder/navier-stokes-blowup#reproducible-validation) and inspect the [validation script](https://github.com/james-coder/navier-stokes-blowup/blob/main/scripts/validate.py). Compare results with tolerances appropriate to the dtype. Floating-point results and timings can vary with hardware, JAX/compiler versions, and device load. The checked-in reports capture a tested environment; they are not promises of bitwise reproducibility or performance.

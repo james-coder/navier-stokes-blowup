@@ -22,13 +22,13 @@ A first Warp experiment should choose one expensive, mathematically settled kern
 
 Read the Docs supports Sphinx with MyST Markdown and repository-based build configuration. This matches the existing narrative/API docs and makes it possible to publish documentation separately from running simulations. [Sphinx deployment guide](https://docs.readthedocs.com/platform/stable/intro/sphinx.html), [configuration reference](https://docs.readthedocs.com/platform/stable/config-file/v2.html).
 
-The repository contains `.readthedocs.yaml`, `docs/conf.py`, a navigation index, and pinned documentation requirements. The build uses only documentation dependencies; it does not launch CUDA or recompute experiments. The standalone observatory and numerical data are copied into the generated site.
+The repository contains the [Read the Docs configuration](https://github.com/james-coder/navier-stokes-blowup/blob/main/.readthedocs.yaml), [Sphinx configuration](https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/conf.py), [navigation index](index.md), and [pinned documentation requirements](https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/requirements.txt). The build uses only documentation dependencies; it does not launch CUDA or recompute experiments. The [standalone Observatory](https://htmlpreview.github.io/?https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/observatory.html) and [numerical data](observatory.json) are copied into the generated site.
 
-Build locally:
+[Download the prebuilt documentation ZIP](https://github.com/james-coder/navier-stokes-blowup/releases/latest/download/documentation.zip), or build locally:
 
 ```bash
 python -m pip install -r docs/requirements.txt
 python -m sphinx -W --keep-going -b html docs outputs/site
 ```
 
-Open `outputs/site/index.html`. The local build is checked. **Hosted Read the Docs deployment is Not Yet Tested / Not Connected.** No hosted project, webhook, or service account was created. Importing the GitHub repository into Read the Docs is the remaining hosting step; until then, the repo does not claim a live Read the Docs URL.
+After building, open `outputs/site/index.html` on your machine; after extracting the ZIP, open `index.html` in the extracted folder. The local build is checked. **Hosted Read the Docs deployment is Not Yet Tested / Not Connected.** [Issue #103](https://github.com/james-coder/navier-stokes-blowup/issues/103) tracks connecting the GitHub repository and verifying the hosted deployment.
