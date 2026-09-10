@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Install and explore ns-blowup — recorded walkthrough</title>
-<style>body{max-width:1100px;margin:36px auto;padding:0 20px;font:18px/1.6 system-ui;color:#17202a;background:#f9fafb}h1{line-height:1.2}video{display:block;width:100%;background:#111c2b}a{color:#125ca4}.note{padding:16px;border-left:4px solid #a76d14;background:#fff7e8}</style>
+<style>body{max-width:1100px;margin:36px auto;padding:0 20px;font:18px/1.6 system-ui;color:#17202a;background:#f9fafb}h1{line-height:1.2}video{display:block;width:100%;background:#111c2b}a{color:#125ca4}button{font:inherit;padding:5px 10px;margin:3px;background:white;border:1px solid #a9b5c0;border-radius:4px;cursor:pointer}.note{padding:16px;border-left:4px solid #a76d14;background:#fff7e8}</style>
 </head><body>
 <h1>Install and explore ns-blowup</h1>
 <p>A real clean installation of PyPI version <strong>0.1.0</strong>, recorded on CPU with ScreenCLI. Follow the commands, simulate a Taylor–Green vortex, export the plot and data, then generate and explore the offline Observatory.</p>
@@ -9,6 +9,8 @@
 <source src="https://github.com/james-coder/navier-stokes-blowup/releases/download/v0.1.0/onboarding.webm" type="video/webm">
 Your browser does not support this video. <a href="https://github.com/james-coder/navier-stokes-blowup/releases/download/v0.1.0/onboarding.webm">Download the recording</a> to watch locally.
 </video>
+<p>Jump to: <button onclick="seek(0)">Environment</button> <button onclick="seek(25)">Install</button> <button onclick="seek(152)">Verify import</button> <button onclick="seek(157)">Simulation</button> <button onclick="seek(184)">Plot</button> <button onclick="seek(190)">Generate app</button> <button onclick="seek(216)">Explore app</button></p>
+<script>function seek(time){const video=document.querySelector('video');video.currentTime=time;video.play();}</script>
 <p><a href="https://github.com/james-coder/navier-stokes-blowup/releases/download/v0.1.0/onboarding.webm">Download recording (WebM)</a> · <a href="https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/recordings/transcript.md">Exact commands and transcript</a> · <a href="https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/recordings/demo.py">Simulation script</a> · <a href="https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/recordings/recording.json">Versions and checksum</a></p>
 <p class="note">This historical walkthrough demonstrates version 0.1.0. The Observatory is a component preview; the complete smooth blowup construction is not implemented. The recording has on-screen step captions and a text transcript, with no audio. Streaming this video needs a network connection; the generated Observatory itself works offline.</p>
 <p><a href="https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/recording.md">How to reproduce the recording</a> · <a href="https://htmlpreview.github.io/?https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/observatory.html">Try the Observatory</a></p>

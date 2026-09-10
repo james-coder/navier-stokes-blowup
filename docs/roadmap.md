@@ -12,6 +12,8 @@ The [issue backlog](backlog.md) breaks these stages, validation gaps, and option
 
 Record each profile equation, parameter inequality, support cutoff, normalization, and matching condition against a pinned mathematical source. Implement actual coefficient-selection and profile-solving algorithms, not only dataclasses that accept unknown coefficients. Distinguish existence choices from formulas and provide a reproducible choice strategy.
 
+The [source-pinned construction map](construction-map.md) now covers the sixteen stages, explicit inner equations, parameter order, normalization, infinite sums, and identified quantitative choices. Numerical selection of the complete admissible parameter set and the matched inner profile remains outstanding.
+
 Acceptance: two independent implementations or numerical representations agree on specified compact domains; parameter constraints and profile identities pass; reference error is estimated. The upstream dependency map is in the [paper](https://cdn.openai.com/pdf/32d9f210-8b73-45e0-91bc-82a30aef8a9a/navier-stokes.pdf) and [Lean tree](https://github.com/openai/NavierStokesAndEuler/tree/8937a8f4cbc7abaab5e9e97d1cc7f5d2319d9538).
 
 ## 2. Implement matching and corrections
@@ -23,6 +25,8 @@ Acceptance: component identities survive composition; divergence and momentum er
 ## 3. Publish a reference dataset
 
 Define evaluation domains, time-remaining ranges, dimensional normalization, selected parameters, precision, and truncation strategy. Store diagnostics and field samples with hashes. Provide a higher-precision reference and independent comparisons before presenting the dataset as ground truth within any claimed tolerance.
+
+An [independent multiprecision component reference and decimal dataset](multiprecision.md) now exist for coordinates and the heat exterior. The assembled-field dataset still depends on stages 1 and 2 above.
 
 Acceptance: a clean environment reproduces the stated numerical results; the limiting mathematical claims remain clearly attributed to their proof sources. Python translation accuracy and theorem validity are separate questions.
 
