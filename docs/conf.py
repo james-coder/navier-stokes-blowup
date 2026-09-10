@@ -4,7 +4,7 @@ import os
 
 project = "ns-blowup"
 author = "ns-blowup contributors"
-release = "0.1.0"
+release = "0.2.0"
 extensions = ["myst_parser", "sphinx.ext.mathjax"]
 myst_enable_extensions = ["dollarmath", "colon_fence"]
 source_suffix = {".md": "markdown"}

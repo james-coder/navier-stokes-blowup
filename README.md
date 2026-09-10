@@ -4,7 +4,7 @@
 
 The aim is to make a new mathematical construction something people can inspect, evaluate, and eventually use to challenge numerical solvers. A friendly Python API provides the simulation and diagnostics underneath it.
 
-**Version 0.1.0 is a research preview.** The library runs real 2D/3D periodic simulations and evaluates specific components of OpenAI’s published construction. **The complete smooth blowup solution is Not Implemented.** This release does not yet support the claim that it reproduces the theorem or enables previously impossible fluid simulation.
+**Version 0.2.0 is a research preview.** The library runs real 2D/3D periodic simulations and evaluates specific components of OpenAI’s published construction. **The complete smooth blowup solution is Not Implemented.** This release does not yet support the claim that it reproduces the theorem or enables previously impossible fluid simulation.
 
 [Open the observatory](https://htmlpreview.github.io/?https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/observatory.html) · [Download offline app and docs](https://github.com/james-coder/navier-stokes-blowup/releases/latest/download/documentation.zip) · [Getting started](https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/tutorial.md) · [API](https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/api.md) · [Research and implementation gaps](https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/research.md) · [Original conversation](https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/conversation.md)
 
@@ -39,13 +39,13 @@ Requires **Python 3.12+**. Install the research preview from [PyPI](https://pypi
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
-python -m pip install 'ns-blowup[plot]==0.1.0'
+python -m pip install 'ns-blowup[plot]==0.2.0'
 ```
 
 For an NVIDIA GPU on Linux/WSL2:
 
 ```bash
-python -m pip install 'ns-blowup[cuda12,plot]==0.1.0'
+python -m pip install 'ns-blowup[cuda12,plot]==0.2.0'
 export XLA_PYTHON_CLIENT_PREALLOCATE=false
 ```
 

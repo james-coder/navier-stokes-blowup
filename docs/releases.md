@@ -6,7 +6,8 @@ Pushes to `main`, pull requests, and manual CI dispatches run:
 
 1. CPU tests and runnable examples on Python 3.12 and 3.13.
 2. A Sphinx documentation build with warnings treated as errors.
-3. Wheel and source-distribution builds, metadata checks, and an installed-wheel smoke test outside the checkout.
+3. Chromium interaction and data-download checks on committed and freshly generated Observatory artifacts.
+4. Wheel and source-distribution builds, metadata checks, and an installed-wheel smoke test outside the checkout.
 
 The test results, built documentation, and distributions are available as artifacts on the [CI runs](https://github.com/james-coder/navier-stokes-blowup/actions/workflows/ci.yml). You can also [download the latest released documentation ZIP](https://github.com/james-coder/navier-stokes-blowup/releases/latest/download/documentation.zip). CUDA tests remain a [separately recorded local check](validation.md); GitHub-hosted CPU runners do not establish GPU support. Action versions are pinned to release commit hashes, with [monthly Dependabot updates](https://github.com/james-coder/navier-stokes-blowup/blob/main/.github/dependabot.yml). Normal CI has read-only repository permissions.
 
