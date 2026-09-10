@@ -6,7 +6,7 @@ The aim is to make a new mathematical construction something people can inspect,
 
 **Version 0.1.0 is a research preview.** The library runs real 2D/3D periodic simulations and evaluates specific components of OpenAI’s published construction. **The complete smooth blowup solution is Not Implemented.** This release does not yet support the claim that it reproduces the theorem or enables previously impossible fluid simulation.
 
-[Open the observatory](docs/observatory.html) · [Getting started](docs/tutorial.md) · [API](docs/api.md) · [Research and implementation gaps](docs/research.md) · [Original conversation](docs/conversation.md)
+[Open the observatory](https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/observatory.html) · [Getting started](https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/tutorial.md) · [API](https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/api.md) · [Research and implementation gaps](https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/research.md) · [Original conversation](https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/conversation.md)
 
 ## The flagship application
 
@@ -30,7 +30,7 @@ To use the checked-in app, download/open `docs/observatory.html` in a browser. G
 python -m ns_blowup.observatory --output outputs/observatory.html
 ```
 
-Its data are also saved as `outputs/observatory.json`. The intended mature application and its acceptance criteria are described in [the roadmap](docs/roadmap.md).
+Its data are also saved as `outputs/observatory.json`. The intended mature application and its acceptance criteria are described in [the roadmap](https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/roadmap.md).
 
 ## Install
 
@@ -108,7 +108,7 @@ The momentum residual is
 R = ∂t u + (u · ∇)u + ∇p − ν Δu − f
 ```
 
-Pointwise checks differentiate field callbacks independently of the spectral solver. Tests include wrong-pressure/wrong-force controls so a residual that always returns zero would fail. The implemented exact flows are documented with their formulas in [the numerical-methods note](docs/numerics.md).
+Pointwise checks differentiate field callbacks independently of the spectral solver. Tests include wrong-pressure/wrong-force controls so a residual that always returns zero would fail. The implemented exact flows are documented with their formulas in [the numerical-methods note](https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/numerics.md).
 
 ## Differentiable simulation
 
@@ -129,7 +129,7 @@ def final_energy(amplitude):
 d_energy_d_amplitude = jax.jit(jax.grad(final_energy))(1.0)
 ```
 
-[The forcing-optimization example](examples/optimize_forcing.py) infers a scalar forcing amplitude through the numerical evolution. It is a small reproducible inverse problem, not evidence of globally optimal engineering designs. Differentiable CFD predates this project and the cited blowup result: see [JAX-Fluids](https://arxiv.org/abs/2203.13760) and [PhiFlow](https://github.com/tum-pbs/PhiFlow).
+[The forcing-optimization example](https://github.com/james-coder/navier-stokes-blowup/blob/main/examples/optimize_forcing.py) infers a scalar forcing amplitude through the numerical evolution. It is a small reproducible inverse problem, not evidence of globally optimal engineering designs. Differentiable CFD predates this project and the cited blowup result: see [JAX-Fluids](https://arxiv.org/abs/2203.13760) and [PhiFlow](https://github.com/tum-pbs/PhiFlow).
 
 ## What works, and what does not
 
@@ -173,7 +173,7 @@ python examples/optimize_forcing.py
 
 **Final local test runs: 34 passed on CPU and 34 passed on CUDA (2026-09-10).**
 
-Recorded environments and measurements: [CPU](docs/validation-cpu.json), [GPU](docs/validation-gpu.json), [validation explanation](docs/validation.md). Tests enable x64 within the test process. The installed library never enables global x64 or memory preallocation on import.
+Recorded environments and measurements: [CPU](https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/validation-cpu.json), [GPU](https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/validation-gpu.json), [validation explanation](https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/validation.md). Tests enable x64 within the test process. The installed library never enables global x64 or memory preallocation on import.
 
 The reports separate compilation from repeated execution and wait for device completion. That follows [JAX’s benchmarking guidance](https://docs.jax.dev/en/latest/benchmarking.html). These small checks, on an occupied GPU, are **not** a fair performance ranking.
 
@@ -181,7 +181,7 @@ The reports separate compilation from repeated execution and wait for device com
 
 The current solver uses periodic Fourier differentiation, a pressure projection, strict two-thirds truncation, and explicit RK4. It solves in physical units chosen consistently by the caller; `nu` is kinematic viscosity and pressure is per unit density. The default box has side length `2π`.
 
-Periodic spectral methods are an established route for this problem; [Mortensen and Langtangen (2016)](https://arxiv.org/abs/1602.03638) and [spectralDNS](https://github.com/spectralDNS/spectralDNS) provide important prior art. Our choices and independent tests are described in [Numerics](docs/numerics.md).
+Periodic spectral methods are an established route for this problem; [Mortensen and Langtangen (2016)](https://arxiv.org/abs/1602.03638) and [spectralDNS](https://github.com/spectralDNS/spectralDNS) provide important prior art. Our choices and independent tests are described in [Numerics](https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/numerics.md).
 
 Use `JAX_ENABLE_X64=1` and `dtype="float64"` for tighter numerical checks. FP64 is not arbitrary precision. See [JAX’s default-dtype documentation](https://docs.jax.dev/en/latest/default_dtypes.html). The convenience API checks timestep estimates on the host; use `SpectralSolver.integrate` for compiled fixed-step loops and differentiation. An adaptive timestep cannot rescue inadequate spatial resolution.
 
@@ -201,7 +201,7 @@ Becoming a widely trusted library requires reliable examples, stable interfaces,
 
 **Warp:** a promising optional kernel backend, with no performance claim yet. Keep the JAX reference and evaluate targeted kernels first; Warp’s JAX autodiff integration has documented restrictions. [Warp JAX interoperability](https://nvidia.github.io/warp/stable/user_guide/interoperability/jax.html).
 
-**Read the Docs:** configuration and a Sphinx/MyST site are included. The local build is tested; hosted deployment is **Not Yet Tested / Not Connected**. [Build instructions and assessment](docs/platforms.md), [Read the Docs Sphinx guide](https://docs.readthedocs.com/platform/stable/intro/sphinx.html).
+**Read the Docs:** configuration and a Sphinx/MyST site are included. The local build is tested; hosted deployment is **Not Yet Tested / Not Connected**. [Build instructions and assessment](https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/platforms.md), [Read the Docs Sphinx guide](https://docs.readthedocs.com/platform/stable/intro/sphinx.html).
 
 ## Blender
 
@@ -209,10 +209,10 @@ Blender remains a possible presentation frontend for the flagship, rather than t
 
 ## Builds and releases
 
-GitHub Actions tests Python 3.12/3.13, builds the documentation, builds and checks wheel/source distributions, and exercises the installed wheel. Matching `v*` tags run the same validation before publishing to PyPI through Trusted Publishing, then attaching the same distributions, documentation, and checksums to a GitHub Release. No stored PyPI API token is needed. See [the release workflow](docs/releases.md) and [PyPI's Trusted Publishing guide](https://docs.pypi.org/trusted-publishers/using-a-publisher/). Read the Docs hosting is not connected.
+GitHub Actions tests Python 3.12/3.13, builds the documentation, builds and checks wheel/source distributions, and exercises the installed wheel. Matching `v*` tags run the same validation before publishing to PyPI through Trusted Publishing, then attaching the same distributions, documentation, and checksums to a GitHub Release. No stored PyPI API token is needed. See [the release workflow](https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/releases.md) and [PyPI's Trusted Publishing guide](https://docs.pypi.org/trusted-publishers/using-a-publisher/). Read the Docs hosting is not connected.
 
 ## Sources and provenance
 
-The shared conversation was extracted with the existing `chatgpt-import-share` checkout. The [Markdown transcript](docs/conversation.md), [structured export](docs/conversation.json), and [source manifest](docs/source-manifest.json) preserve provenance and redacted/unavailable-message markers. The conversation is a design input, not independent evidence for its claims.
+The shared conversation was extracted with the existing `chatgpt-import-share` checkout. The [Markdown transcript](https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/conversation.md), [structured export](https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/conversation.json), and [source manifest](https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/source-manifest.json) preserve provenance and redacted/unavailable-message markers. The conversation is a design input, not independent evidence for its claims.
 
-The manifest pins the inspected Lean commit and records the paper hash. Read the [research note](docs/research.md) and [annotated sources](docs/sources.md) for the implementation decisions and unresolved questions. [Contributing](CONTRIBUTING.md) describes the evidence required for new features. Code is MIT licensed; the imported conversation and referenced third-party works retain their respective rights.
+The manifest pins the inspected Lean commit and records the paper hash. Read the [research note](https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/research.md) and [annotated sources](https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/sources.md) for the implementation decisions and unresolved questions. [Contributing](https://github.com/james-coder/navier-stokes-blowup/blob/main/CONTRIBUTING.md) describes the evidence required for new features. Code is MIT licensed; the imported conversation and referenced third-party works retain their respective rights.
