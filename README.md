@@ -73,6 +73,8 @@ print(result.diagnostics()["energy"])
 
 This is the actual vorticity plot from the example above: a 32×32 periodic [Taylor–Green vortex](https://en.wikipedia.org/wiki/Taylor%E2%80%93Green_vortex) flow at `t=1.0`, with viscosity `nu=0.05`. [View the full-size PNG](https://raw.githubusercontent.com/james-coder/navier-stokes-blowup/refs/heads/main/docs/images/vorticity.png) or [reproduce it with the rendering example](https://github.com/james-coder/navier-stokes-blowup/blob/main/examples/render_vorticity.py).
 
+[Watch the ScreenCLI installation and demo](https://htmlpreview.github.io/?https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/recording.html), with [exact commands, transcript and reproduction instructions](https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/recording.md).
+
 `Simulation` chooses a JAX device, projects the initial velocity, adapts the timestep, checks for nonfinite states, and returns uniformly timed snapshots. `result.final` is the last velocity field. No array-layout knowledge is needed for the built-in examples.
 
 For a genuinely three-dimensional exact benchmark:

@@ -1,0 +1,45 @@
+{
+  "package_version": "0.1.0",
+  "screencli": "0.3.12",
+  "playwright": "1.59.1",
+  "node": "v24.8.0",
+  "mode": "ScreenCLI exported launchSession API with deterministic browser actions; local capture, no cloud agent",
+  "sha256": "ffb83f2ce3c7cb406c3fdbb860f4fdf9cb163fefdc8da2faaaa81d247508bb1d",
+  "transcript": [
+    {
+      "title": "Create a clean Python environment",
+      "command": "python3 -m venv venv",
+      "output": "",
+      "started_at": "2026-09-10T12:16:03.265Z",
+      "exit_code": 0
+    },
+    {
+      "title": "Install ns-blowup 0.1.0 from PyPI — CPU",
+      "command": "venv/bin/python -m pip install --quiet --disable-pip-version-check \"ns-blowup[plot]==0.1.0\"",
+      "output": "",
+      "started_at": "2026-09-10T12:16:27.525Z",
+      "exit_code": 0
+    },
+    {
+      "title": "Verify Python, package and device",
+      "command": "venv/bin/python -c \"import sys, ns_blowup, jax; print(sys.version); print(\\\"ns-blowup\\\", ns_blowup.__version__); print(\\\"JAX\\\", jax.__version__); print(\\\"Devices:\\\", jax.devices())\"",
+      "output": "3.12.3 (main, Jun 19 2026, 12:46:00) [GCC 13.3.0]\nns-blowup 0.1.0\nJAX 0.11.1\nDevices: [CpuDevice(id=0)]\n",
+      "started_at": "2026-09-10T12:18:34.248Z",
+      "exit_code": 0
+    },
+    {
+      "title": "Simulate the 2D Taylor–Green vortex and export results",
+      "command": "venv/bin/python demo.py",
+      "output": "Velocity shape: (21, 32, 32, 2)\nDevice: cpu:0\nFinal energy: 8.080427\nNPZ: flow.npz\nVTK: flow.vtk\nPlot: vorticity.png\n",
+      "started_at": "2026-09-10T12:18:39.179Z",
+      "exit_code": 0
+    },
+    {
+      "title": "Generate the offline Observatory",
+      "command": "venv/bin/python -m ns_blowup.observatory --output observatory.html",
+      "output": "observatory.html\n",
+      "started_at": "2026-09-10T12:19:11.694Z",
+      "exit_code": 0
+    }
+  ]
+}

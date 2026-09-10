@@ -2,6 +2,8 @@
 
 ## 1. Explore before installing
 
+[Watch the recorded installation and demo](https://htmlpreview.github.io/?https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/recording.html), with [exact commands and reproduction details](recording.md).
+
 Open [the Singularity Observatory in your browser](https://htmlpreview.github.io/?https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/observatory.html). Move the time slider, switch between fixed physical scale and following the core, and change the grid resolution. The labels distinguish coordinate geometry from measured numerical residuals. Inspect the [numerical dataset](observatory.json), or use the app's **Download numerical data (JSON)** button to save it for analysis.
 
 For offline use, [download the app and documentation ZIP](https://github.com/james-coder/navier-stokes-blowup/releases/latest/download/documentation.zip), extract it, and open `observatory.html` from that folder. In a built or downloaded documentation site, you can also [open the bundled app](observatory.html) directly. The downloaded app needs no Python installation or network connection.

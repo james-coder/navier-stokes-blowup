@@ -1,0 +1,7 @@
+{
+  "name": "ns-blowup-onboarding-recording",
+  "private": true,
+  "type": "module",
+  "dependencies": { "screencli": "0.3.12" },
+  "overrides": { "playwright": "1.59.1" }
+}

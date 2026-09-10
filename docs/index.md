@@ -15,6 +15,7 @@ In a built or downloaded documentation site, you can also [open the bundled app]
 :caption: Documentation
 
 tutorial
+recording
 api
 numerics
 validation
