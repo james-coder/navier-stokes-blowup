@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ns-blowup"
+version = "0.1.0"
+description = "Differentiable JAX Navier–Stokes simulation and analytical validation"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = ["jax>=0.11.1", "numpy>=1.26"]
+
+[project.optional-dependencies]
+cuda12 = ["jax[cuda12]>=0.11.1"]
+cuda13 = ["jax[cuda13]>=0.11.1"]
+plot = ["matplotlib>=3.8"]
+dev = ["pytest>=8"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.setuptools.package-data]
+ns_blowup = ["assets/*.html"]

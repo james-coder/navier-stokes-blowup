@@ -1,0 +1,5 @@
+*.md whitespace=-blank-at-eol
+docs/observatory.html linguist-generated=true
+docs/observatory.json linguist-generated=true
+docs/conversation.json linguist-documentation=true
+docs/conversation.md linguist-documentation=true

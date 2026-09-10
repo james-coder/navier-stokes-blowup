@@ -1,0 +1,41 @@
+# Validation record
+
+Validation was performed locally on 2026-09-10 with Python 3.12.3, JAX 0.11.1, NumPy 2.5.3, Linux/WSL2, and an NVIDIA GeForce RTX 4090 with driver 610.74. The GPU already had substantial unrelated memory use; these results are not a performance comparison. The complete installed environment is recorded in [environment-tested.txt](environment-tested.txt).
+
+## Automated tests
+
+- **CPU: 34 passed**, no failures, errors, or skips.
+- **CUDA: 34 passed**, no failures, errors, or skips.
+
+[Test summary](test-summary.json) records the counts from the final JUnit reports. The test suite covers exact fields, wrong-equation controls, nonlinear forcing, time refinement, projection and mean preservation, nonlinear aliasing, energy production, gradients, data export/reload, user-input errors, mathematical component identities, and the observatory data experiment.
+
+The observatory generator prefers CPU. In a CUDA-only process it falls back to the enabled device, which was exercised by the CUDA suite. A test of this report-generation configuration initially failed and was fixed before the final complete runs. No test was skipped to obtain the reported pass counts.
+
+## Numerical reports
+
+The [CPU report](validation-cpu.json) and [GPU report](validation-gpu.json) use 16 points per axis, 20 steps of size 0.01, and viscosity 0.1. The 2D benchmark is Taylor–Green; the 3D benchmark is ABC. The numbers below are maximum absolute velocity errors against their analytical values at the final time.
+
+| Backend | Dimension | FP32 error | FP64 error |
+|---|---|---|---|
+| CPU | 2D | 2.98e-7 | 5.11e-15 |
+| CPU | 3D | 4.77e-7 | 9.44e-16 |
+| RTX 4090 / CUDA 12 | 2D | 4.17e-7 | 5.11e-15 |
+| RTX 4090 / CUDA 12 | 3D | 4.77e-7 | 8.88e-16 |
+
+The reports also contain divergence and analytical residual measurements. FP32 divergence was below 1.4e-6; FP64 divergence was below 2.6e-15 in these checks. Passing these smooth low-mode problems does not qualify the solver for underresolved turbulence or singularity tracking.
+
+The heat exterior was checked against an independent adaptive integral at `Z = 0, 0.001, 0.1, 1, 4`, using 96 quadrature nodes. Heat-equation and momentum checks used selected positive radii and times. Tests do not establish a uniform bound outside these ranges or for arbitrary derivative orders.
+
+## Application and packaging
+
+The standalone HTML app passed Chromium desktop (1280×960) and mobile (390×844) viewport checks, including slider changes, resolution changes, animation, no page errors, and no horizontal mobile overflow. Browser inspection covered the resulting layout. Other browsers, assistive technology, and exhaustive interaction testing are **Not Yet Tested**.
+
+The quickstart, forcing optimization, construction-scale export, figure reproduction, and 3D float64 CLI were executed. The forcing example reduced its objective from about 0.1005 to 5e-15 and recovered the target amplitude 1.5. This is one small inverse problem, not a general optimization guarantee.
+
+A wheel was built and installed into a separate temporary target. Import from that installation, a simulation, and generation of the observatory using its packaged HTML resource were checked outside the source checkout. This is not a fresh-machine dependency-installation test.
+
+For hosted GitHub Actions and Python 3.13 results, consult the [CI run history](https://github.com/james-coder/navier-stokes-blowup/actions/workflows/ci.yml); those results are separate from this local record. CUDA 13, non-NVIDIA accelerators, multi-GPU behavior, external viewer round-trips, the complete blowup construction, and independent formal-proof checking are **Not Yet Tested**. The README distinguishes untested implemented code from features that are not implemented at all.
+
+## Reproduction
+
+Use the README commands and compare results with tolerances appropriate to the dtype. Floating-point results and timings can vary with hardware, JAX/compiler versions, and device load. The checked-in reports capture a tested environment; they are not promises of bitwise reproducibility or performance.

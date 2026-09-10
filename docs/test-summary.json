@@ -1,0 +1,22 @@
+{
+  "date": "2026-09-10",
+  "pytest": {
+    "cpu": {
+      "tests": "34",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "60.054"
+    },
+    "gpu": {
+      "tests": "34",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "85.155"
+    }
+  },
+  "browser": "Chromium: desktop/mobile viewport, time slider, resolution control, animation, no page errors or horizontal mobile overflow",
+  "examples": "quickstart.py, optimize_forcing.py, approach_singularity.py, reproduce_figures.py and 3D float64 CLI executed",
+  "unverified": "Hosted CI, full blowup construction, independent Lean/Comparator verification, Blender/ParaView GUI, production performance"
+}

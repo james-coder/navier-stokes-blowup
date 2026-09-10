@@ -1,0 +1,14 @@
+{
+  "share_url": "https://chatgpt.com/share/6aa282ed-5d6c-83e8-bf0b-dcd417fcfe52",
+  "retrieved_on": "2026-09-10",
+  "importer_repository": "https://github.com/james-coder/chatgpt-import-share",
+  "importer_commit": "0e9982a73cb216f2aee47c91ee3b688467c6d0d5",
+  "lean_repository": "https://github.com/openai/NavierStokesAndEuler",
+  "lean_commit": "8937a8f4cbc7abaab5e9e97d1cc7f5d2319d9538",
+  "paper_url": "https://cdn.openai.com/pdf/32d9f210-8b73-45e0-91bc-82a30aef8a9a/navier-stokes.pdf",
+  "paper_sha256": "0e779481c4da40bd28d1e642e1d8ca57447d129610df28dfa5a11e9af8ae228f",
+  "paper_pages": 166,
+  "transcript_sha256": "c22487e42a86496a9062f903633847b24b2e6f193cce769b0dfea8946682af4f",
+  "structured_export_sha256": "6882c7db0c169cf8f9e068aecca12a47ecd790f3e64ceef80f30b5763b645c16",
+  "limits": "Public share output includes redacted tool messages and unavailable custom instructions; these were preserved, not reconstructed."
+}

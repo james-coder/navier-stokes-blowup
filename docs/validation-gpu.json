@@ -1,0 +1,76 @@
+{
+  "package_version": "0.1.0",
+  "python": "3.12.3",
+  "jax": "0.11.1",
+  "numpy": "2.5.3",
+  "devices": [
+    "cuda:0"
+  ],
+  "device_kind": "NVIDIA GeForce RTX 4090",
+  "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "scope": "Small exact-flow checks; occupied GPU; not a CPU/GPU performance comparison",
+  "results": [
+    {
+      "dimension": 2,
+      "shape": [
+        16,
+        16
+      ],
+      "dtype": "float32",
+      "steps": 20,
+      "dt": 0.01,
+      "velocity_max_error": 4.172325134277344e-07,
+      "divergence_max": 9.962948297470575e-07,
+      "analytical_residual_max": 7.450580596923828e-08,
+      "compile_and_run_seconds": 0.44683957286179066,
+      "warmed_median_seconds": 0.012958444189280272
+    },
+    {
+      "dimension": 2,
+      "shape": [
+        16,
+        16
+      ],
+      "dtype": "float64",
+      "steps": 20,
+      "dt": 0.01,
+      "velocity_max_error": 5.10702591327572e-15,
+      "divergence_max": 1.2047668073602673e-15,
+      "analytical_residual_max": 1.1102230246251565e-16,
+      "compile_and_run_seconds": 0.2697867788374424,
+      "warmed_median_seconds": 0.024213721975684166
+    },
+    {
+      "dimension": 3,
+      "shape": [
+        16,
+        16,
+        16
+      ],
+      "dtype": "float32",
+      "steps": 20,
+      "dt": 0.01,
+      "velocity_max_error": 4.76837158203125e-07,
+      "divergence_max": 1.2823923043470131e-06,
+      "analytical_residual_max": 8.940696716308594e-08,
+      "compile_and_run_seconds": 0.32894449681043625,
+      "warmed_median_seconds": 0.019343617372214794
+    },
+    {
+      "dimension": 3,
+      "shape": [
+        16,
+        16,
+        16
+      ],
+      "dtype": "float64",
+      "steps": 20,
+      "dt": 0.01,
+      "velocity_max_error": 8.881784197001252e-16,
+      "divergence_max": 2.5971127365619655e-15,
+      "analytical_residual_max": 2.7755575615628914e-16,
+      "compile_and_run_seconds": 0.30897730123251677,
+      "warmed_median_seconds": 0.04645228339359164
+    }
+  ]
+}

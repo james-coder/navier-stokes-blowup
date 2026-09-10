@@ -1,0 +1,6 @@
+include LICENSE README.md CHANGELOG.md CONTRIBUTING.md
+recursive-include src/ns_blowup/assets *.html
+recursive-include tests *.py
+recursive-include examples *.py
+recursive-include scripts *.py
+recursive-include docs *.md *.py *.txt *.json *.html
