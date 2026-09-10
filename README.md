@@ -34,22 +34,24 @@ Its data are also saved as `outputs/observatory.json`. The intended mature appli
 
 ## Install
 
-Requires **Python 3.12+**. Install from this checkout; no PyPI release has been published or verified.
+Requires **Python 3.12+**. Install the research preview from [PyPI](https://pypi.org/project/ns-blowup/):
 
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
-python -m pip install -e '.[dev,plot]'
+python -m pip install 'ns-blowup[plot]==0.1.0'
 ```
 
 For an NVIDIA GPU on Linux/WSL2:
 
 ```bash
-python -m pip install -e '.[cuda12,dev,plot]'
+python -m pip install 'ns-blowup[cuda12,plot]==0.1.0'
 export XLA_PYTHON_CLIENT_PREALLOCATE=false
 ```
 
 CUDA 12 was exercised on the local RTX 4090. A `cuda13` extra is provided but **Not Yet Tested**. Driver/platform requirements come from the [JAX installation guide](https://docs.jax.dev/en/latest/installation.html). Disabling preallocation helps when sharing a GPU; it does not make an oversized calculation fit in memory. See [JAX GPU memory allocation](https://docs.jax.dev/en/latest/gpu_memory_allocation.html).
+
+For development, clone this repository and run `python -m pip install -e '.[dev,plot]'` from its root.
 
 ## Your first simulation
 
@@ -155,7 +157,7 @@ d_energy_d_amplitude = jax.jit(jax.grad(final_energy))(1.0)
 | Blender add-on / OpenVDB exporter | **Not Implemented / Not Yet Tested** | Integration research only |
 | Speedup over Blender or other CFD packages | **Not Yet Tested** | No comparative benchmark or speed claim |
 | Hosted CI | Configured; see [live runs](https://github.com/james-coder/navier-stokes-blowup/actions/workflows/ci.yml) | CPU tests, docs and distribution builds; CUDA remains locally tested |
-| Tag-triggered releases / PyPI | **Not Yet Tested** | GitHub release automation configured; no release tag or PyPI publication performed |
+| Tag-triggered releases / PyPI | Automated validation and Trusted Publishing | Check the [release run](https://github.com/james-coder/navier-stokes-blowup/actions/workflows/release.yml) for publication status |
 
 ## Reproducible validation
 
@@ -207,7 +209,7 @@ Blender remains a possible presentation frontend for the flagship, rather than t
 
 ## Builds and releases
 
-GitHub Actions tests Python 3.12/3.13, builds the documentation, builds and checks wheel/source distributions, and exercises the installed wheel. Matching `v*` tags run the same validation before publishing GitHub Release assets and checksums. See [the release workflow](docs/releases.md). PyPI publishing is not configured; Read the Docs hosting is not connected.
+GitHub Actions tests Python 3.12/3.13, builds the documentation, builds and checks wheel/source distributions, and exercises the installed wheel. Matching `v*` tags run the same validation before publishing to PyPI through Trusted Publishing, then attaching the same distributions, documentation, and checksums to a GitHub Release. No stored PyPI API token is needed. See [the release workflow](docs/releases.md) and [PyPI's Trusted Publishing guide](https://docs.pypi.org/trusted-publishers/using-a-publisher/). Read the Docs hosting is not connected.
 
 ## Sources and provenance
 

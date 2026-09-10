@@ -19,8 +19,20 @@ git tag -a v0.1.0 -m 'ns-blowup 0.1.0 research preview'
 git push origin v0.1.0
 ```
 
-The tag workflow runs the reusable CI pipeline again against that tag. A mismatch between tag and package version fails before publication. After validation succeeds, a separate job publishes a GitHub Release containing the wheel, source archive, documentation ZIP, and SHA256 checksums. That publication job alone receives write permission. Prerelease version tags are marked as prereleases.
+The tag workflow runs the reusable CI pipeline again against that tag. A mismatch between tag and package version fails before publication. After validation succeeds, the `pypi` job downloads the validated distributions and publishes them to PyPI. It does not rebuild or run project code and alone receives `id-token: write` permission. After PyPI publication succeeds, a separate job publishes a GitHub Release containing the same wheel and source archive, the documentation ZIP, and SHA256 checksums. Only the GitHub Release job receives repository write permission. Prerelease version tags are marked as prereleases on GitHub.
 
-The workflow uses the repository's automatic `GITHUB_TOKEN`; it requires no personal token. It publishes to GitHub Releases only. PyPI trusted publishing is not configured and no package-index credential is assumed. A failed release upload does not overwrite an existing release; inspect the failure before retrying or changing a published tag.
+PyPI uses [Trusted Publishing](https://docs.pypi.org/trusted-publishers/using-a-publisher/): GitHub proves the workflow identity through OIDC, without a stored API token. The configured publisher is:
 
-**No release tag was created as part of the initial repository setup.** The tag-triggered release path is configured but **Not Yet Tested end to end** until a release actually runs. Documentation CI produces a downloadable site; a hosted Read the Docs project still needs connecting separately.
+| Field | Value |
+| --- | --- |
+| PyPI project | `ns-blowup` |
+| GitHub owner | `james-coder` |
+| Repository | `navier-stokes-blowup` |
+| Workflow filename | `release.yml` |
+| GitHub environment | `pypi` |
+
+The GitHub environment permits version tags. No personal GitHub token or PyPI secret is needed by the workflow. The first upload creates the PyPI project through the pending publisher; subsequent releases use the resulting project publisher. See [PyPI's project-creation guide](https://docs.pypi.org/trusted-publishers/creating-a-project-through-oidc/).
+
+Published PyPI files are immutable. Do not move a published tag or try to replace its files. If PyPI succeeds but the GitHub Release job fails, rerun only the failed jobs; do not upload the distributions again. For code or artifact corrections, increment the version and publish a new tag.
+
+Check [Release Actions](https://github.com/james-coder/navier-stokes-blowup/actions/workflows/release.yml), [GitHub Releases](https://github.com/james-coder/navier-stokes-blowup/releases), and [PyPI](https://pypi.org/project/ns-blowup/) for publication status. Documentation CI produces a downloadable site; hosted Read the Docs deployment remains **Not Yet Tested / Not Connected**.
