@@ -158,7 +158,9 @@ Outstanding implementation, validation, and future ideas are tracked in the [Git
 | Formal certification of Python results | **Not Yet Tested** | Lean build and Comparator were not run here |
 | Near-singularity solver tracking | **Not Yet Tested** | Needs complete executable field and certified truncation control |
 | CUDA 13, AMD, Apple GPU, TPU, multi-GPU | **Not Yet Tested** | No hardware/runtime validation here; multi-GPU API not implemented |
-| Large turbulent production cases / arbitrary precision | **Not Yet Tested** | No production qualification; arbitrary-precision backend not implemented |
+| True 3D Taylor–Green initial condition | Tested at Re=20, t≤1 | [Independent NumPy/SciPy comparison and spatial convergence](https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/taylor-green-3d.md) |
+| Arbitrary-precision component reference | Tested at 25/50/75 decimal digits | [Independent integral, identity checks and decimal dataset](https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/multiprecision.md); full field not implemented |
+| Large turbulent production cases | **Not Yet Tested** | No high-Re DNS or production qualification |
 | Walls, obstacles, free surfaces, FLIP/APIC, smoke/fire | **Not Implemented** | Current domain is periodic and single-phase |
 | Blender add-on / OpenVDB exporter | **Not Implemented / Not Yet Tested** | Integration research only |
 | Speedup over Blender or other CFD packages | **Not Yet Tested** | No comparative benchmark or speed claim |

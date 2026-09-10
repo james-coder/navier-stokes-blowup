@@ -1,0 +1,167 @@
+{
+  "schema_version": 1,
+  "reynolds_number": 20,
+  "nu": 0.05,
+  "amplitude": 1,
+  "wavenumber": 1,
+  "domain": "[0,2*pi)^3 periodic",
+  "times": [
+    0.0,
+    0.25,
+    0.5,
+    0.75,
+    1.0
+  ],
+  "precision": "float64",
+  "python": "3.12.3",
+  "numpy": "2.5.3",
+  "scipy": "1.18.1",
+  "jax": "0.11.1",
+  "reference_runs": [
+    {
+      "mean_energy": [
+        0.12499999999999457,
+        0.11595037987178997,
+        0.1074669045634237,
+        0.09945889167655268,
+        0.09187228420677386
+      ],
+      "mean_enstrophy": [
+        0.375,
+        0.34990843175621955,
+        0.32936395335753044,
+        0.3116305915494163,
+        0.295480131275155
+      ],
+      "resolution": 32,
+      "rhs_evaluations": 629,
+      "method": "NumPy rotational form + SciPy DOP853",
+      "rtol": 1e-11,
+      "atol": 1e-13,
+      "max_dt": 0.02
+    },
+    {
+      "mean_energy": [
+        0.12499999999999654,
+        0.11595037987179209,
+        0.10746690456341523,
+        0.0994588916765483,
+        0.09187228420651929
+      ],
+      "mean_enstrophy": [
+        0.3749999999999995,
+        0.34990843175621905,
+        0.3293639533575326,
+        0.31163059155039613,
+        0.29548013130640044
+      ],
+      "resolution": 48,
+      "rhs_evaluations": 629,
+      "method": "NumPy rotational form + SciPy DOP853",
+      "rtol": 1e-11,
+      "atol": 1e-13,
+      "max_dt": 0.02
+    }
+  ],
+  "jax_runs": [
+    {
+      "mean_energy": [
+        0.12499999999999988,
+        0.11595038023845715,
+        0.10746693449414967,
+        0.09945921478030595,
+        0.09187379945011649
+      ],
+      "mean_enstrophy": [
+        0.3749999999999992,
+        0.3499083356212371,
+        0.32936030709419317,
+        0.3116064308518614,
+        0.2954027144613254
+      ],
+      "resolution": 12,
+      "metadata": {
+        "steps": 200,
+        "device": "cpu:0",
+        "dtype": "float64",
+        "initial_projection_relative_change": 5.539900811638391e-16,
+        "integrator": "RK4 step doubling",
+        "rtol": 1e-09,
+        "atol": 1e-11,
+        "rejected_steps": 0,
+        "max_accepted_error_ratio": 3.6824514083425974e-05,
+        "dealiasing": "strict 2/3 truncation"
+      },
+      "final_velocity_rms_error": 0.003779987292460388,
+      "max_energy_error": 1.5152435972054512e-06,
+      "max_enstrophy_error": 7.74168450750623e-05
+    },
+    {
+      "mean_energy": [
+        0.12499999999999989,
+        0.11595037987182213,
+        0.1074669046012232,
+        0.09945889307184257,
+        0.0918722978544044
+      ],
+      "mean_enstrophy": [
+        0.3749999999999994,
+        0.34990843173918346,
+        0.32936394629976923,
+        0.3116304354054447,
+        0.2954791202694093
+      ],
+      "resolution": 18,
+      "metadata": {
+        "steps": 200,
+        "device": "cpu:0",
+        "dtype": "float64",
+        "initial_projection_relative_change": 5.077284530596734e-16,
+        "integrator": "RK4 step doubling",
+        "rtol": 1e-09,
+        "atol": 1e-11,
+        "rejected_steps": 0,
+        "max_accepted_error_ratio": 0.00023382555938156413,
+        "dealiasing": "strict 2/3 truncation"
+      },
+      "final_velocity_rms_error": 0.0003476682314908496,
+      "max_energy_error": 1.3647885113710068e-08,
+      "max_enstrophy_error": 1.0110369911275896e-06
+    },
+    {
+      "mean_energy": [
+        0.12499999999999993,
+        0.11595037987178296,
+        0.10746690456348167,
+        0.09945889168456415,
+        0.09187228436232615
+      ],
+      "mean_enstrophy": [
+        0.37499999999999956,
+        0.3499084317562017,
+        0.32936395334071983,
+        0.31163059037114693,
+        0.29548011646244415
+      ],
+      "resolution": 24,
+      "metadata": {
+        "steps": 200,
+        "device": "cpu:0",
+        "dtype": "float64",
+        "initial_projection_relative_change": 4.683327757217409e-16,
+        "integrator": "RK4 step doubling",
+        "rtol": 1e-09,
+        "atol": 1e-11,
+        "rejected_steps": 0,
+        "max_accepted_error_ratio": 0.0003650021825052885,
+        "dealiasing": "strict 2/3 truncation"
+      },
+      "final_velocity_rms_error": 3.900824705322652e-05,
+      "max_energy_error": 1.5580686740790384e-10,
+      "max_enstrophy_error": 1.484395628637003e-08
+    }
+  ],
+  "scope": "Resolved short-time Re=20 validation; no high-Re DNS claim.",
+  "reference_refinement_max_mean_energy_difference": 2.545741395465484e-13,
+  "reference_refinement_max_mean_enstrophy_difference": 3.124545067123563e-11
+}

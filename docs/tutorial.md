@@ -30,6 +30,8 @@ For a vorticity plot, use `result.plot(quantity="vorticity", path="outputs/vorti
 
 Change the shape to `(24,24,24)` and the initial condition to `"abc"` for a three-dimensional exact flow. Use small shapes while learning; storage and intermediate arrays grow with the product of all grid dimensions.
 
+For a nonlinear 3D flow, use `"taylor-green-3d"` on a 3D grid. See the [3D Taylor–Green example and independent convergence results](taylor-green-3d.md) for its initial condition, Reynolds number, and tested regime.
+
 ## 3. Define your own initial condition
 
 ```python

@@ -23,6 +23,7 @@ All primary names are imported from `ns_blowup`. Python docstrings describe argu
 | `solver.divergence(u)`, `solver.vorticity(u)` | Fourier diagnostics | Scalar/vector grid array |
 | `solver.suggest_dt(u, safety=0.4)` | Instantaneous step estimate | Scalar |
 | `TaylorGreen(nu=..., amplitude=..., wavenumber=...)` | Exact 2D vortex, with optional 3D embedding | Field object |
+| `TaylorGreen3D(amplitude=..., wavenumber=...).initial_velocity(points)` | True nonlinear 3D benchmark initial data | Velocity array |
 | `ABCFlow(nu=..., a=..., b=..., c=..., wavenumber=...)` | Exact 3D Beltrami flow | Field object |
 | `FieldDiagnostics(velocity, pressure, nu, forcing=None)` | Autodiff diagnostics | Diagnostic object |
 | `checks.residual(points,t)`, `.divergence(...)`, `.vorticity(...)`, `.gradient(...)` | Batched analytical checks | JAX array |
@@ -34,6 +35,10 @@ All primary names are imported from `ns_blowup`. Python docstrings describe argu
 | `HeatExterior(h=..., c=..., nu=..., order=...)` | Outer-flow quadrature, away from axis | Field object |
 | `exterior.factor(Z)` | Heat-factor integral approximation | Scalar/batched array |
 | `exterior.azimuthal_velocity(radius,tau)` | Swirl speed with direct time remaining | Scalar/batched array |
+
+`sim.run` also accepts `rtol`, `atol`, and `max_rejections` for [error-controlled acceptance and retries](numerics.md). Use `"taylor-green-3d"` on a 3D grid for the [independently checked 3D benchmark](taylor-green-3d.md).
+
+The optional `ns_blowup.reference.ComponentReference(dps=...)` provides [independent multiprecision component evaluation](multiprecision.md). Its scalar results are mpmath numbers, and its `tau` argument is time remaining, not physical time.
 
 Analytical field objects expose `.velocity(points,t)`, `.pressure(points,t)`, and `.forcing(points,t)`. Diagnostics require callbacks that accept a **single point** and return respectively `(d,)`, `()`, and `(d,)`; the supplied field objects also support batches. Time is scalar per evaluation. Use `jax.vmap` for multiple times.
 

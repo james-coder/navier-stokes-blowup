@@ -18,7 +18,10 @@ tutorial
 api
 numerics
 validation
+multiprecision
+taylor-green-3d
 research
+construction-map
 roadmap
 backlog
 platforms

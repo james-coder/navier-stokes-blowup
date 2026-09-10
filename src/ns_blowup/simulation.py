@@ -10,6 +10,7 @@ import jax.numpy as jnp
 import numpy as np
 
 from .analytical import TaylorGreen, ABCFlow
+from .benchmarks import TaylorGreen3D
 from .grid import PeriodicGrid
 from .spectral import SpectralSolver
 
@@ -128,18 +129,26 @@ class Simulation:
             self.points = self.grid.points(self.dtype)
 
     def run(self, initial="taylor-green", *, t_end=1.0, t0=0.0, frames=21, dt=None,
-            forcing=None, safety=0.4, max_steps=100000, progress=None):
+            forcing=None, safety=0.4, rtol=None, atol=None, max_steps=100000,
+            max_rejections=1000, progress=None):
         """Evolve a named benchmark, point callback initial(x), or velocity array.
 
-        dt is an optional upper bound; the stability estimate is recomputed each
-        step. progress(time, completed_steps) runs after each saved frame.
+        dt is an optional upper bound. RK4 step doubling estimates local error
+        and retries rejected steps; rtol/atol default to 1e-4/1e-6 for float32
+        and 1e-6/1e-9 for float64. These are estimates, not error guarantees.
+        max_steps counts accepted steps; max_rejections limits total retries.
+        progress(time, completed_steps) runs after each saved frame.
         Results contain exactly `frames` uniformly timed snapshots including t0.
         """
         if not math.isfinite(t0) or not math.isfinite(t_end) or t_end <= t0:
             raise ValueError("t_end must be finite and greater than finite t0")
-        frames, max_steps = operator.index(frames), operator.index(max_steps)
-        if frames < 2 or max_steps < 1:
-            raise ValueError("frames must be >=2 and max_steps must be positive")
+        frames, max_steps, max_rejections = map(operator.index, (frames, max_steps, max_rejections))
+        if frames < 2 or max_steps < 1 or max_rejections < 0:
+            raise ValueError("frames must be >=2, max_steps positive, and max_rejections nonnegative")
+        rtol = (1e-6 if self.dtype == jnp.float64 else 1e-4) if rtol is None else rtol
+        atol = (1e-9 if self.dtype == jnp.float64 else 1e-6) if atol is None else atol
+        if any(not math.isfinite(x) or x < 0 for x in (rtol, atol)) or rtol + atol == 0:
+            raise ValueError("rtol and atol must be finite, nonnegative and not both zero")
         if dt is not None and (not math.isfinite(dt) or dt <= 0):
             raise ValueError("dt must be finite and positive")
         with jax.default_device(self.device):
@@ -148,12 +157,16 @@ class Simulation:
                     model = TaylorGreen(nu=self.solver.nu)
                 elif initial == "abc" and self.grid.ndim == 3:
                     model = ABCFlow(nu=self.solver.nu)
+                elif initial == "taylor-green-3d" and self.grid.ndim == 3:
+                    if t0 != 0:
+                        raise ValueError("'taylor-green-3d' defines initial data at t0=0 only; use a saved field to restart")
+                    model = TaylorGreen3D()
                 else:
-                    raise ValueError("initial must be 'taylor-green', 'abc' (3D), a callback, or an array")
+                    raise ValueError("initial must be 'taylor-green', 'abc' or 'taylor-green-3d' (3D), a callback, or an array")
                 if any(not math.isclose(length / (2 * math.pi), round(length / (2 * math.pi)), abs_tol=1e-12)
                        for length in self.grid.lengths):
                     raise ValueError("named benchmarks need lengths that are integer multiples of 2*pi; supply a periodic callback for other boxes")
-                u = model.velocity(self.points, t0)
+                u = model.initial_velocity(self.points) if isinstance(model, TaylorGreen3D) else model.velocity(self.points, t0)
             else:
                 u = initial(self.points) if callable(initial) else initial
             u = jnp.asarray(u, dtype=self.dtype)
@@ -163,20 +176,47 @@ class Simulation:
             projected = self.solver.project(u).astype(self.dtype)
             projection_change = float(jnp.linalg.norm(projected-u) / jnp.maximum(jnp.linalg.norm(u), 1e-30))
             u = projected
-            step = jax.jit(lambda u, t, dt: self.solver.step(u, t, dt, forcing).astype(self.dtype))
+            def trial(u, t, step_dt):
+                coarse = self.solver.step(u, t, step_dt, forcing).astype(self.dtype)
+                half = self.solver.step(u, t, step_dt / 2, forcing).astype(self.dtype)
+                fine = self.solver.step(half, t + step_dt / 2, step_dt / 2, forcing).astype(self.dtype)
+                scale = atol + rtol * jnp.maximum(jnp.abs(u), jnp.abs(fine))
+                difference = jnp.abs(fine - coarse) / 15
+                ratio = jnp.where(scale > 0, difference / scale,
+                                  jnp.where(difference == 0, 0., jnp.inf))
+                error = jnp.max(ratio)
+                # Catch a force-driven speed increase missed by the initial CFL estimate.
+                candidate_bound = jnp.minimum(self.solver.suggest_dt(half, safety),
+                                              self.solver.suggest_dt(fine, safety))
+                finite = jnp.all(jnp.isfinite(fine)) & jnp.all(jnp.isfinite(coarse))
+                return fine, error, candidate_bound, finite
+            attempt = jax.jit(trial)
             bound = jax.jit(lambda u: self.solver.suggest_dt(u, safety))
             times = np.linspace(t0, t_end, frames)
             snapshots, t, steps = [u], float(t0), 0
+            rejected, next_dt, accepted_error = 0, math.inf, 0.0
             for target in times[1:]:
                 while t < target:
                     if steps >= max_steps:
                         raise RuntimeError("max_steps reached; shorten the run or raise max_steps")
-                    step_dt = min(float(bound(u)), float(target - t), math.inf if dt is None else dt)
+                    step_dt = min(next_dt, float(bound(u)), float(target - t), math.inf if dt is None else dt)
                     if not math.isfinite(step_dt) or step_dt <= 0 or t + step_dt == t:
                         raise FloatingPointError("timestep cannot advance; check resolution, forcing and precision")
-                    u = step(u, jnp.asarray(t, self.dtype), jnp.asarray(step_dt, self.dtype))
-                    if not bool(jnp.all(jnp.isfinite(u))):
-                        raise FloatingPointError("flow became nonfinite; reduce dt/safety and inspect forcing")
+                    candidate, error, candidate_bound, finite = attempt(
+                        u, jnp.asarray(t, self.dtype), jnp.asarray(step_dt, self.dtype))
+                    error, candidate_bound = float(error), float(candidate_bound)
+                    valid = bool(finite) and math.isfinite(error) and math.isfinite(candidate_bound)
+                    factor = max(0.1, min(2.0, 0.9 * max(error, 1e-16)**(-0.2))) if valid else 0.1
+                    next_dt = min(step_dt * factor, candidate_bound) if valid else step_dt * 0.1
+                    if not valid or error > 1 or step_dt > candidate_bound:
+                        rejected += 1
+                        if rejected > max_rejections:
+                            raise RuntimeError(f"max_rejections reached at t={t:.17g}; "
+                                               "inspect forcing, tolerances, precision and dt")
+                        next_dt = min(next_dt, step_dt * 0.9)
+                        continue
+                    u = candidate
+                    accepted_error = max(accepted_error, error)
                     t = min(float(target), t + step_dt)
                     steps += 1
                 snapshots.append(u)
@@ -185,4 +225,6 @@ class Simulation:
             return SimulationResult(self.grid, jnp.asarray(times), jnp.stack(snapshots), self.solver.nu,
                                     {"steps": steps, "device": str(self.device), "dtype": str(self.dtype),
                                      "initial_projection_relative_change": projection_change,
-                                     "integrator": "RK4", "dealiasing": "strict 2/3 truncation"})
+                                     "integrator": "RK4 step doubling", "rtol": rtol, "atol": atol,
+                                     "rejected_steps": rejected, "max_accepted_error_ratio": accepted_error,
+                                     "dealiasing": "strict 2/3 truncation"})
