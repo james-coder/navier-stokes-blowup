@@ -38,7 +38,7 @@ The quickstart, forcing optimization, construction-scale export, figure reproduc
 
 A wheel was built and installed into a separate temporary target. Import from that installation, a simulation, and generation of the observatory using its packaged HTML resource were checked outside the source checkout. This is not a fresh-machine dependency-installation test.
 
-For hosted GitHub Actions and Python 3.13 results, consult the [CI run history](https://github.com/james-coder/navier-stokes-blowup/actions/workflows/ci.yml); those results are separate from this local record. CUDA 13, non-NVIDIA accelerators, multi-GPU behavior, external viewer round-trips, the complete blowup construction, and independent formal-proof checking are **Not Yet Tested**. The README distinguishes untested implemented code from features that are not implemented at all.
+The [0.2.0 release run](https://github.com/james-coder/navier-stokes-blowup/actions/runs/34477591808) passed all 43 tests separately on Python 3.12 and 3.13, plus all eight browser checks, documentation, packaging and publication. These hosted CPU checks are separate from the local CUDA record. The [separate upstream formal audit](formal-audit.md) passed the full Lean build and the Navier–Stokes Comparator checks with both configured kernels; this does not certify Python results. CUDA 13, non-NVIDIA accelerators, multi-GPU behavior, external viewer round-trips, and the complete blowup construction are **Not Yet Tested**. The README distinguishes untested implemented code from features that are not implemented at all.
 
 ## Reproduction
 

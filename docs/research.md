@@ -12,7 +12,7 @@ The paper describes a concentrating leading field, matched profiles, oscillatory
 
 The inspected Lean coordinate source explicitly defines the positive coordinate through an existence theorem and `Classical.choose` in a noncomputable section. That is a precise example of why proof code is not automatically a numerical evaluator. For this particular scalar equation the existence characterization also suggests a practical contraction iteration, which the Python module implements and tests against implicit derivatives. That inference is local to the coordinate map; it does not establish that all later choices are equally easy to compute. [^4].
 
-The upstream metadata identifies formalized results and their main declarations. The Python project does not independently validate that metadata: no Lean build or Comparator execution was performed here. Recording an upstream commit prevents an implementation note from silently referring to a different source tree later. A theorem declaration alone also does not validate a finite-precision translation. [^5].
+The upstream metadata identifies formalized results and their main declarations. We subsequently built the pinned repository successfully and ran its separate Navier–Stokes Comparator procedure: the statements and axioms matched, and both nanoda and Lean kernels accepted the exported solution. The [formal audit record](formal-audit.md) preserves exact versions, trust assumptions, every attempt log and scope. These upstream checks do not validate the Python finite-precision translation. Recording an upstream commit prevents an implementation note from silently referring to a different source tree later. [^5].
 
 ## What the numerical translation adds
 

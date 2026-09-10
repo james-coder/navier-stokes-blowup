@@ -1,0 +1,134 @@
+{
+  "upstream": "8937a8f4cbc7abaab5e9e97d1cc7f5d2319d9538",
+  "lean4export": "cacf989bd75f608700820f6afc595f32e7a99a4d",
+  "landrun": "811cfff51ceaf3d9843708aa6d22e9b84ccac8b4",
+  "nanoda": "4c544ed4099c8227f07d5de77ad1e69fb0740a27",
+  "toolchain": "leanprover/lean4:v4.34.0-rc2",
+  "lake_manifest_sha256": "5ec1dc8e009008d0efb9601cd38f6ba54e753fd538b0e5f8c3e6c5ec72ee1e09",
+  "uname": "6.6.87.2-microsoft-standard-WSL2",
+  "binaries_sha256": {
+    "landrun": "77e50e6723be4526df04ad69c498e4e29312f418656fccba6356fb2360601bf6",
+    "nanoda_bin": "bf88f66bb543f7a6925066c00ba58b13b5c29e8665993e2627fa30294d374a9e",
+    "comparator": "514de8d2acbd6e0102575cd2c575e336b7c4a40daf3ae66abe97cef5e1e6b02a",
+    "lean4export": "4fa9e14cada304109e85da5048bcd411cf781a03539b3e50953e5c537074bd9e"
+  },
+  "go_version": "go version go1.27.1 linux/amd64",
+  "rust_version": "rustc 1.93.0 (254b59607 2026-01-19)",
+  "elan_archive_sha256": "42b94d4244e8353142c456ec0e4ca6528fd898a6c604d4059f494e706e431f63",
+  "lean_version": "Lean (version 4.34.0-rc2, x86_64-unknown-linux-gnu, commit 6a10ac8c22beadecabdbb0919c2b50214762f91d, Release)",
+  "toolchain_files_sha256": {
+    "bin/lean": "e8baaa71855a616dc351028f3ad2200051b0671f423a1696a100e809302d5550",
+    "bin/lake": "6f53827dab18010d6c690d14c8401cacabc1db958edb3552a877ed4cf1dd995d",
+    "lib/lean/libleanshared.so": "cddf08bd2b9239f8ce2e2aba8630c47e37b6b341b47705d9d0ba910ad6db13b5",
+    "lib/lean/libleanshared_1.so": "69e900c025f40bf05c14f5b9ec48071b3130e34c96a7c45ee2eb5b6f307e19e6",
+    "lib/lean/libleanshared_2.so": "38d0a03750b2e8d51161885ad597a8b4f6d3b85215c5a52aecd2b3753273cf3f"
+  },
+  "go_archive_sha256": "63d339f0da5ab53635a56f2490a7984dfe12dfcff22ad749f63edaf590168445",
+  "lake_dependencies": {
+    "Comparator": "19e111e2141cf333c7daff0f64c5f24acc91dd2e",
+    "mathlib": "85e3a25e006c35636f0e53b0e9296caca2685bc0",
+    "lean4export": "cacf989bd75f608700820f6afc595f32e7a99a4d",
+    "plausible": "d9598f07b1bc701f1e3aae163d2681c1fd978793",
+    "LeanSearchClient": "ba67e212be1197b84c1f1f6299488a10a3002713",
+    "importGraph": "d8823026ac7ef130c253089d95685f9877b95323",
+    "proofwidgets": "a8acbfd87375ff4abe14ce09db5b7664d383bc7f",
+    "aesop": "18889deb9e83ea7420ef51c160d6f88552e744e3",
+    "Qq": "507746ab8f4b643ccdacb2ec4cdb5853fa9f8ab3",
+    "batteries": "d54dddc581e08be364c278052863524bff7a99a9",
+    "Cli": "ab3a82db9fea14cf0fd7f5a2de650f4b534640af"
+  },
+  "lean_archive_publisher_digest": "sha256:3d011041203acacf300d343a39673f7d233743397993797c941346ae9e5df1a8",
+  "lean_archive_publisher_url": "https://github.com/leanprover/lean4/releases/download/v4.34.0-rc2/lean-4.34.0-rc2-linux.tar.zst",
+  "recorded_date": "2026-09-10",
+  "build": {
+    "result": "passed",
+    "exit_code": 0,
+    "jobs": 11251,
+    "command": "lake build",
+    "default_targets": [
+      "NavierStokes",
+      "Euler",
+      "ComparatorChallenges"
+    ],
+    "checkout_clean_after_build": true,
+    "log": "lean-build.log"
+  },
+  "comparator": {
+    "commit": "19e111e2141cf333c7daff0f64c5f24acc91dd2e",
+    "result": "passed",
+    "challenge": "ComparatorChallenges/NavierStokes.json",
+    "declarations": [
+      "NavierStokes.Comparator.navier_stokes_breakdown_R3",
+      "NavierStokes.Comparator.navier_stokes_breakdown_periodic"
+    ],
+    "permitted_axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+    ],
+    "enable_nanoda": true,
+    "checkout_clean_after_solution_build": true,
+    "attempts": [
+      {
+        "log": "comparator-ns-attempt-1.log",
+        "result": "failed",
+        "reason": "Incorrect lean4export binary path; stopped before solution compilation.",
+        "exit_code": 1
+      },
+      {
+        "log": "comparator-ns-attempt-2.log",
+        "result": "stopped",
+        "reason": "Stopped deliberately before export to move temporary export storage onto attached ext4; sandbox-built solution modules retained."
+      },
+      {
+        "log": "comparator-ns.log",
+        "result": "passed",
+        "reason": "Resumed with correct binary paths and TMPDIR on attached ext4, using the same source and sandbox-built modules.",
+        "exit_code": 0
+      }
+    ],
+    "solution_export": {
+      "bytes": 1071397994,
+      "sha256": "429d30a8d9110faeb84ae0919b5d1b074f3ceea236254eda104f2007262e492f",
+      "nanoda_config": {
+        "nat_extension": true,
+        "permitted_axioms": [
+          "propext",
+          "Quot.sound",
+          "Classical.choice"
+        ],
+        "string_extension": true,
+        "unpermitted_axiom_hard_error": true,
+        "use_stdin": false
+      }
+    },
+    "exit_code": 0,
+    "nanoda_result": "accepted",
+    "lean_kernel_result": "accepted",
+    "statement_and_axiom_checks": "passed",
+    "service_runtime_seconds": 773.493,
+    "checkout_clean_after_audit": true
+  },
+  "trust_scope": {
+    "same_nonroot_workstation_account": true,
+    "separate_build_and_comparator_checkouts": true,
+    "independent_hardware_or_vm": false,
+    "trusted_mathlib_cache": true,
+    "sandbox": "landrun plus systemd RestrictAddressFamilies=~AF_UNIX",
+    "python_results_certified": false,
+    "euler_comparator_executed": false
+  },
+  "finished_record_utc": "2026-09-10T12:58:32.144119+00:00",
+  "logs_sha256": {
+    "comparator-cache.log": "9fc26927e5d70e8f9003d0fdfb2bca47a8de08c06a8f24a577c431e0d379f35e",
+    "comparator-ns-attempt-1.log": "c1582af6dd7cbca3839d91a3ea2823247d321e1ce2e1e7eb603aa8cb9c582f2f",
+    "comparator-ns-attempt-2.log": "f36600fde220382fa90ae44c7697922317c7e69dfded900aa586ddb7b43b64bd",
+    "comparator-ns.log": "b8ffe25982b37bcfa861f438bfd2c9f90dca4642d9323d04405eef010615e2e2",
+    "comparator-tools-build.log": "8a94bdc132a8a0c8cced537ee69ca25d1c624b47c886ab005be218cb85387c2c",
+    "landrun-build.log": "8fd616f3c8e00143f64e50067784e68e85316f57812bb69a7a7958dbffed48dc",
+    "lean-build.log": "e236109c9558a1c979745d30b87fc0ad2a2fbcea9f4265d1a9ec1e82e39debb6",
+    "lean-cache.log": "ef1cd0f261fe01688356fed999d5d5f8eabb8c80d498565bce5f18c84c57a1e3",
+    "nanoda-build.log": "44058e88fc345f06e880578032b689485d84248c7df7c604e268722ec3c5669c"
+  },
+  "log_archive_sha256": "11bf09f1de1eedca500cad917c6b541e0eae92d71e71c669e2b98a3dda109048"
+}

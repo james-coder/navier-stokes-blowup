@@ -157,7 +157,8 @@ Outstanding implementation, validation, and future ideas are tracked in the [Git
 | Heat exterior | Tested: bounded sample ranges | Independent adaptive quadrature and momentum/heat residuals |
 | Observatory browser controls and responsive layout | Tested in Chromium | Desktop/mobile viewport, sliders, animation, no JS errors |
 | Full smooth blowup construction | **Not Implemented / Not Yet Tested** | Missing inner profiles, matching, pulses, corrections, localization |
-| Formal certification of Python results | **Not Yet Tested** | Lean build and Comparator were not run here |
+| Pinned upstream Lean build and Navier–Stokes Comparator audit | Passed | [Source pins, both kernel verdicts and complete logs](https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/formal-audit.md) |
+| Formal certification of Python results | **Not Implemented** | Upstream proof checks do not certify this numerical translation |
 | Near-singularity solver tracking | **Not Yet Tested** | Needs complete executable field and certified truncation control |
 | CUDA 13, AMD, Apple GPU, TPU, multi-GPU | **Not Yet Tested** | No hardware/runtime validation here; multi-GPU API not implemented |
 | True 3D Taylor–Green initial condition | Tested at Re=20, t≤1 | [Independent NumPy/SciPy comparison and spatial convergence](https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/taylor-green-3d.md) |

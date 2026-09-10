@@ -14,5 +14,5 @@ html_title = "ns-blowup — Singularity Observatory"
 html_baseurl = os.environ.get("READTHEDOCS_CANONICAL_URL", "")
 # Preserve source artifacts as downloads without parsing the imported conversation.
 root = Path(__file__).parent
-html_extra_path = [p.name for p in root.iterdir() if p.suffix in (".json", ".txt", ".html")
+html_extra_path = [p.name for p in root.iterdir() if p.suffix in (".json", ".txt", ".html", ".zip")
                    and p.name != "requirements.txt"] + ["conversation.md"]

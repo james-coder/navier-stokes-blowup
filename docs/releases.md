@@ -13,6 +13,8 @@ The test results, built documentation, and distributions are available as artifa
 
 ## Versioned releases
 
+Version **0.2.0** is published on [PyPI](https://pypi.org/project/ns-blowup/0.2.0/) and [GitHub](https://github.com/james-coder/navier-stokes-blowup/releases/tag/v0.2.0). Its [release run](https://github.com/james-coder/navier-stokes-blowup/actions/runs/34477591808) passed 43 tests on each Python version, eight browser checks, documentation, packaging, and publication. The published wheel and source archive were downloaded and matched to PyPI's SHA-256 digests; an actual fresh PyPI installation then passed the installed-wheel, 3D flow, and multiprecision checks. The released documentation ZIP includes the fixed offline app, recording page and reference datasets.
+
 Update `project.version` in [pyproject.toml](https://github.com/james-coder/navier-stokes-blowup/blob/main/pyproject.toml), `__version__` in [the package](https://github.com/james-coder/navier-stokes-blowup/blob/main/src/ns_blowup/__init__.py), `release` in [the Sphinx configuration](https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/conf.py), and [the changelog](https://github.com/james-coder/navier-stokes-blowup/blob/main/CHANGELOG.md) together. Commit the change and let [main CI](https://github.com/james-coder/navier-stokes-blowup/actions/workflows/ci.yml) pass. Then create and push a matching version tag, for example:
 
 ```bash

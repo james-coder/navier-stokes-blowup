@@ -1,6 +1,6 @@
 # API guide
 
-All primary names are imported from `ns_blowup`. Python docstrings describe arguments and array conventions. Version 0.1 is a preview; additions should preserve these conventions, and breaking changes must be called out before release.
+All primary names are imported from `ns_blowup`. Python docstrings describe arguments and array conventions. Version 0.2 is a preview; additions should preserve these conventions, and breaking changes must be called out before release.
 
 | API | Purpose | Returns |
 |---|---|---|

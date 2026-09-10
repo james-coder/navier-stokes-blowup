@@ -32,3 +32,9 @@ The audit covers the README status matrix, all roadmap stages, research and plat
 Existing CPU/CUDA checks, the public repository and transcript, CPU CI, package/documentation builds, Trusted Publishing, and the successful 0.1.0 release remain completed work. New issues cover additional scope and validation; they do not reset those accomplishments.
 
 Update capability claims with evidence as issues are resolved. A finite numerical check is not proof of a limiting mathematical claim, and an optional application idea is not an implemented feature.
+
+## Progress after the initial audit
+
+The [0.2.0 release](https://github.com/james-coder/navier-stokes-blowup/releases/tag/v0.2.0) adds adaptive stepping, a true 3D benchmark, independent multiprecision components, browser regression checks and a [recorded walkthrough](recording.md). The construction map and [upstream formal audits](formal-audit.md) are complete.
+
+The requested parameter selection and inner-profile solver remain unfinished: [#13](https://github.com/james-coder/navier-stokes-blowup/issues/13) and [#14](https://github.com/james-coder/navier-stokes-blowup/issues/14). Their concrete prerequisites are [effective analytic norm bounds, #116](https://github.com/james-coder/navier-stokes-blowup/issues/116) and [the outgoing schedule with its matched pressure datum, #117](https://github.com/james-coder/navier-stokes-blowup/issues/117). See the [construction map](construction-map.md) for the pinned formulas and reasons these inputs are needed.
