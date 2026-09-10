@@ -33,7 +33,7 @@ Every step of the convenience driver synchronizes with the host for checks. It p
 
 These formulas are independently checked by substitution using autodiff and by evolution through the solver; their use does not depend on a blowup theorem.
 
-Let `a(t)=a0 exp(−2νk²t)`. The 2D Taylor–Green solution is
+Let `a(t)=a0 exp(−2νk²t)`. The 2D [Taylor–Green vortex](https://en.wikipedia.org/wiki/Taylor%E2%80%93Green_vortex) solution is
 
 $$
 u=(a\sin(kx)\cos(ky),-a\cos(kx)\sin(ky)),

@@ -20,7 +20,7 @@ print(result.final.shape)  # (32, 32, 2)
 result.plot(path="outputs/first-flow.png")
 ```
 
-The default box is `[0,2π)` in each direction, with periodic boundaries. The initial velocity is a built-in decaying vortex. The viscosity controls diffusion. Frame count controls saved output, not the internal timestep. A saved image shows the final speed by default.
+The default box is `[0,2π)` in each direction, with periodic boundaries. The initial velocity is the built-in 2D [Taylor–Green vortex](https://en.wikipedia.org/wiki/Taylor%E2%80%93Green_vortex), a periodic flow whose vortices weaken as viscosity dissipates their energy. Its known exact solution lets us check the simulation’s accuracy. The viscosity controls diffusion. Frame count controls saved output, not the internal timestep. A saved image shows the final speed by default.
 
 For a vorticity plot, use `result.plot(quantity="vorticity", path="outputs/vorticity.png")`. Here is a checked-in example at `t=1.0`, with a 32×32 grid and `nu=0.05`:
 

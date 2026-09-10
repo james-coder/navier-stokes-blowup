@@ -13,7 +13,7 @@ The observatory generator prefers CPU. In a CUDA-only process it falls back to t
 
 ## Numerical reports
 
-The [CPU report](validation-cpu.json) and [GPU report](validation-gpu.json) use 16 points per axis, 20 steps of size 0.01, and viscosity 0.1. The 2D benchmark is Taylor–Green; the 3D benchmark is ABC. The numbers below are maximum absolute velocity errors against their analytical values at the final time.
+The [CPU report](validation-cpu.json) and [GPU report](validation-gpu.json) use 16 points per axis, 20 steps of size 0.01, and viscosity 0.1. The 2D benchmark is the [Taylor–Green vortex](https://en.wikipedia.org/wiki/Taylor%E2%80%93Green_vortex); the 3D benchmark is ABC. The numbers below are maximum absolute velocity errors against their analytical values at the final time.
 
 | Backend | Dimension | FP32 error | FP64 error |
 |---|---|---|---|
