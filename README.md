@@ -6,7 +6,7 @@ The aim is to make a new mathematical construction something people can inspect,
 
 **Version 0.1.0 is a research preview.** The library runs real 2D/3D periodic simulations and evaluates specific components of OpenAI’s published construction. **The complete smooth blowup solution is Not Implemented.** This release does not yet support the claim that it reproduces the theorem or enables previously impossible fluid simulation.
 
-[Open the observatory](https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/observatory.html) · [Getting started](https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/tutorial.md) · [API](https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/api.md) · [Research and implementation gaps](https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/research.md) · [Original conversation](https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/conversation.md)
+[Open the observatory](https://htmlpreview.github.io/?https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/observatory.html) · [Getting started](https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/tutorial.md) · [API](https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/api.md) · [Research and implementation gaps](https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/research.md) · [Original conversation](https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/conversation.md)
 
 ## The flagship application
 
@@ -24,7 +24,7 @@ The **working preview** lets you:
 
 The geometry sampling threshold is a heuristic. The scaling plots are not measured norms of a completed blowup solution. The heat exterior is valid away from the axis and is itself singular on the axis at all times; it must not be used as smooth initial data for a purported blowup reproduction. The implementation boundary follows equations (3.2), (4.1), and Lemma A.6 of the [paper](https://cdn.openai.com/pdf/32d9f210-8b73-45e0-91bc-82a30aef8a9a/navier-stokes.pdf).
 
-To use the checked-in app, download/open `docs/observatory.html` in a browser. GitHub’s file viewer displays its source. The app is standalone: no server, account, CDN, or Python installation is needed to view it. To regenerate it:
+Use [the browser preview](https://htmlpreview.github.io/?https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/observatory.html) to run the checked-in app directly. For offline use, download `docs/observatory.html` and open it locally; the downloaded app is self-contained and needs no server, account, CDN, or Python installation. To regenerate it:
 
 ```bash
 python -m ns_blowup.observatory --output outputs/observatory.html

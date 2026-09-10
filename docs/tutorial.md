@@ -2,7 +2,9 @@
 
 ## 1. Explore before installing
 
-Open [the Singularity Observatory](observatory.html) as a downloaded local HTML file. Move the time slider, switch between fixed physical scale and following the core, and change the grid resolution. The labels distinguish coordinate geometry from measured numerical residuals. Download the JSON if you want to analyze the plotted data separately.
+Open [the Singularity Observatory in your browser](https://htmlpreview.github.io/?https://github.com/james-coder/navier-stokes-blowup/blob/main/docs/observatory.html). Move the time slider, switch between fixed physical scale and following the core, and change the grid resolution. The labels distinguish coordinate geometry from measured numerical residuals. Download the JSON if you want to analyze the plotted data separately.
+
+For offline use, download `docs/observatory.html` and open it locally. In a built or downloaded documentation site, you can also [open the bundled app](observatory.html) directly. The downloaded app needs no Python installation or network connection.
 
 ## 2. Run a simple flow
 
