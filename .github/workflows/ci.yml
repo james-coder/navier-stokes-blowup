@@ -34,7 +34,7 @@ jobs:
       - run: npm ci
       - run: npx playwright install --with-deps chromium
       - run: npm run test:browser
-      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         if: always()
         with:
           name: browser-regression
@@ -67,7 +67,7 @@ jobs:
       - run: python -m pytest -q --junitxml=outputs/tests.xml
       - run: python examples/quickstart.py
       - run: python examples/optimize_forcing.py
-      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         if: always()
         with:
           name: tests-python-${{ matrix.python }}
@@ -89,7 +89,7 @@ jobs:
           cache-dependency-path: docs/requirements.txt
       - run: python -m pip install -r docs/requirements.txt
       - run: python -m sphinx -W --keep-going -b html docs outputs/site
-      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: documentation-site
           path: outputs/site/
@@ -124,7 +124,7 @@ jobs:
           cp scripts/smoke_wheel.py /tmp/ns-wheel-check/smoke_wheel.py
           cd /tmp
           /tmp/ns-wheel-check/bin/python /tmp/ns-wheel-check/smoke_wheel.py
-      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: python-distributions
           path: dist/*
